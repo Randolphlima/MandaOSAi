@@ -1,0 +1,7 @@
+{
+  "name": "MandaOSAi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
