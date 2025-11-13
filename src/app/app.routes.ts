@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login-home',
     pathMatch: 'full',
   },
   {
@@ -21,5 +21,17 @@ export const routes: Routes = [
   {
     path: 'login-recovery',
     loadComponent: () => import('./login-recovery/login-recovery.page').then( m => m.LoginRecoveryPage)
+  },
+  {
+    path: 'home-list-os',
+    loadComponent: () => import('./home-list-os/home-list-os.page').then( m => m.HomeListOsPage)
+  },
+  {
+    path: 'home-list-map',
+    loadComponent: () => import('./home-list-map/home-list-map.page').then( m => m.HomeListMapPage)
+  },
+  {
+    path: 'os-chamado-home',
+    loadComponent: () => import('./os-chamado-home/os-chamado-home.page').then( m => m.OsChamadoHomePage)
   },
 ];
