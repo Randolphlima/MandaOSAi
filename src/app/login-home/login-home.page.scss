@@ -1,0 +1,33 @@
+ion-content {
+    /* * A propriedade padrão para cor de fundo no Ionic é --background. 
+   * Você pode usar um código hexadecimal, nome da cor, ou RGB.
+   */
+    --background: #8A42E6;
+    /* Um cinza claro */
+}
+
+/* 1. Torna o ion-content um container Flex */
+.ion-content-flex {
+    /* O Shadow DOM do Ionic exige o ::part(scroll) para aplicar o Flexbox corretamente */
+    --padding-bottom: 0px !important;
+    /* Opcional: Remove padding padrão inferior do Ionic */
+}
+
+/* ⚠️ Alvo do Scrollbar: É a parte que realmente contém o conteúdo */
+ion-content::part(scroll) {
+    display: flex;
+    /* Configura a direção do Flex como coluna (vertical) */
+    flex-direction: column;
+    /* Espalha os itens: o primeiro item vai para o topo (flex-start) e o último item vai para o final (flex-end) */
+    justify-content: space-between;
+    /* Garante que o container ocupe 100% da altura disponível */
+    height: 100%;
+}
+
+/* 2. Garante que o container no final empurre o conteúdo */
+.bottom-content-container {
+    /* Usa a margin-top: auto para empurrar o item para o final (bottom) */
+    margin-top: auto;
+    /* Adicione um padding horizontal para melhor visualização */
+    padding: 16px;
+}
