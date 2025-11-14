@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-home',
+    redirectTo: 'login-recovery',
     pathMatch: 'full',
   },
   {

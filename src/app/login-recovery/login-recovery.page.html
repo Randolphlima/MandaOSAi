@@ -1,14 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button 
-        defaultHref="/caminho-da-pagina-anterior" 
-        icon="close" ></ion-back-button>
-    </ion-buttons>
-    
     <ion-title class="ion-text-center">Recuperação de Senha</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  </ion-content>
+
+  <p class="ion-padding ion-text-center">Para receber seu código e criar uma nova senha, precisamos confirmar seu
+    celular. Por favor, informe seu número para que possamos enviar o código de verificação por SMS. 📱</p>
+
+  <div class="ion-padding ion-margin-top">
+
+    <ion-input label="Digite o seu celular" type="tel" label-placement="floating" fill="outline" placeholder="(11) 98765-4321"></ion-input><br><br>
+
+    <ion-button expand="block" color="primary" style="padding-bottom: 12px;">
+      Recuperar Senha
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" color="medium" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Voltar para a Página Anterior
+    </ion-button>
+
+  </div>
+</ion-content>
