@@ -9,7 +9,8 @@
   </ion-img>
 
   <div class="bottom-content-container ion-padding">
-    <ion-button color="dark" expand="block" shape="round" style="padding-bottom: 14px;">Login</ion-button>
+    <ion-button color="dark" expand="block" shape="round" style="padding-bottom: 14px;" [routerLink]="['/login-cadastro']"
+      routerDirection="forward">Login</ion-button>
     <ion-button color="dark" expand="block" fill="outline" shape="round" [routerLink]="['/login-recovery']"
       routerDirection="forward">
       Recuperar Senha

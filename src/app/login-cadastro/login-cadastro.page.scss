@@ -1,0 +1,85 @@
+/* Estilos para o componente 'app-login-wizard' */
+
+:host {
+    // Define cores customizadas para o componente
+    --ion-color-primary: #4B4B96;
+    --ion-color-secondary: #00A389; 
+    --ion-color-danger: #e02121;
+}
+
+/* Estilização Principal do Container para centralizar e alinhar botões */
+.wizard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Crucial para empurrar o 'button-container' para baixo */
+    justify-content: space-between; 
+    padding: 20px 0;
+    text-align: center;
+}
+
+.step-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo da etapa no meio da tela */
+    padding: 0 10px;
+}
+
+.icon-large {
+    font-size: 4rem;
+    color: var(--ion-color-secondary);
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--ion-color-primary);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+ion-input-otp {
+    --ion-font-family: monospace; /* Fonte para melhor leitura dos dígitos */
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+ion-item {
+    max-width: 300px;
+    margin: 20px auto;
+    --border-radius: 8px;
+    --background: #f7f7f7;
+}
+
+.button-container {
+    width: 100%;
+    padding-top: 20px;
+}
+
+ion-button {
+    --border-radius: 10px;
+    font-weight: bold;
+}
+
+.error-message {
+    min-height: 18px; /* Evita que o layout mude quando a mensagem de erro aparece */
+    font-size: 0.9em;
+}
+
+/* Estilos de Cores */
+ion-toolbar[color="primary"] {
+    --background: #4B4B96;
+    --color: #ffffff;
+}
+ion-progress-bar[color="secondary"] {
+    --background: #e0e0e0;
+    --progress-background: var(--ion-color-secondary);
+}

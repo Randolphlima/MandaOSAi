@@ -1,13 +1,71 @@
 <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Acesso ao App ({{ currentStep() }} de 3)</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="prevStep()" [disabled]="currentStep() === 1">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>login-cadastro</ion-title>
+    <ion-progress-bar [value]="progress()" color="secondary"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login-cadastro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="wizard-container">
+    @if (currentStep() === 1) {
+    <div class="step-content">
+      <ion-icon name="business-outline" class="icon-large"></ion-icon>
+      <h2>1. Código da Empresa</h2>
+      <p>Informe o código de identificação da sua empresa (3 dígitos).</p>
+
+      <ion-item class="ion-margin-top" lines="full">
+        <ion-input label="Código" labelPlacement="floating" type="number" maxlength="3" [value]="companyCode()"
+          (ionInput)="handleCompanyCodeInput($event)" placeholder="Ex: 123">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p class="ion-text-center error-message">{{ errorMessage() }}</p>
+      </ion-text>
+    </div>
+    }
+
+    @if (currentStep() === 2) {
+    <div class="step-content">
+      <ion-icon name="key-outline" class="icon-large"></ion-icon>
+      <h2>2. Código do Usuário</h2>
+      <p>Informe seu código de usuário de 4 dígitos.</p>
+
+      <ion-input-otp [length]="4" [value]="userCode()" (ionInput)="handleOtpInput($event, 'user')"></ion-input-otp>
+
+      <ion-text color="danger">
+        <p class="ion-text-center error-message">{{ errorMessage() }}</p>
+      </ion-text>
+    </div>
+    }
+
+    @if (currentStep() === 3) {
+    <div class="step-content">
+      <ion-icon name="key-outline" class="icon-large"></ion-icon>
+      <h2>3. Senha de Acesso</h2>
+      <p>Digite sua senha numérica de 6 dígitos.</p>
+
+      <ion-input-otp [length]="6" [value]="password()" (ionInput)="handleOtpInput($event, 'password')"></ion-input-otp>
+
+      <ion-text color="danger">
+        <p class="ion-text-center error-message">{{ errorMessage() }}</p>
+      </ion-text>
+    </div>
+    }
+
+    <div class="button-container">
+      <ion-button expand="block" (click)="nextStep()" [disabled]="!isNextButtonEnabled()">
+        {{ currentStep() === 3 ? 'FINALIZAR LOGIN' : 'PRÓXIMO' }}
+        @if (currentStep() === 3) {
+        <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+        }
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
