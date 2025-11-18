@@ -1,0 +1,107 @@
+.btn-row {
+    display: flex 1;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* -------------------------------------- */
+/* --- Cores de Fundo do Card por Status --- */
+/* -------------------------------------- */
+
+/* Verde = Finalizado */
+.status-card-finalizado {
+    --background: #e0f2e8;
+    /* Fundo verde claro */
+    border-left: 8px solid #388e3c;
+    /* Borda lateral verde escura */
+}
+
+/* Azul = Instalação */
+.status-card-instalação {
+    --background: #e3f2fd;
+    /* Fundo azul claro */
+    border-left: 8px solid #1976d2;
+    /* Borda lateral azul escura */
+}
+
+/* Vermelho = Prioridade */
+.status-card-prioridade {
+    --background: #fde0e0;
+    /* Fundo vermelho claro */
+    border-left: 8px solid #d32f2f;
+    /* Borda lateral vermelha escura */
+}
+
+/* Laranja = Manutenção */
+.status-card-manutenção {
+    --background: #fff3e0;
+    /* Fundo laranja claro */
+    border-left: 8px solid #f57c00;
+    /* Borda lateral laranja escura */
+}
+
+/* -------------------------------------- */
+/* --- Estilização do Botão de Status --- */
+/* -------------------------------------- */
+
+/* Estilização padrão do botão desabilitado (para o texto do status) */
+.status-button {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    height: auto;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 4px;
+    opacity: 1;
+}
+
+/* Define a cor de fundo do botão baseada na classe do card pai */
+.status-card-finalizado .status-button[disabled] {
+    --background: #388e3c;
+    /* Verde */
+    --color: white;
+}
+
+.status-card-instalação .status-button[disabled] {
+    --background: #1976d2;
+    /* Azul */
+    --color: white;
+}
+
+.status-card-prioridade .status-button[disabled] {
+    --background: #d32f2f;
+    /* Vermelho */
+    --color: white;
+}
+
+.status-card-manutenção .status-button[disabled] {
+    --background: #f57c00;
+    /* Laranja */
+    --color: white;
+}
+
+/* -------------------------------------- */
+/* --- Estilos Gerais do Card --- */
+/* -------------------------------------- */
+
+ion-card {
+    border-radius: 8px;
+    margin: 10px;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ion-card-content p {
+    margin: 4px 0;
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.4;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+}

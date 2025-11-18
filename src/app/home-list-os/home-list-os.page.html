@@ -1,13 +1,60 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>home-list-os</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Lista de Chamados</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home-config">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home-list-os</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <!-- Botões aqui -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-button expand="block" fill="outline">18/11/2025</ion-button>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-button expand="block" fill="outline">Filtro</ion-button>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-button expand="block" fill="outline">Refresh</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-card class="status-card-{{chamado.status.toLowerCase()}}">
+    <ion-card-header>
+      <ion-card-title>{{chamado.nome}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        Chamado: {{chamado.descricao}}
+      </p>
+      <p>
+        Endereço: {{chamado.endereco}}
+      </p>
+
+      <div class="card-footer">
+        <ion-badge class="status-button" disabled>
+          {{chamado.status | uppercase}}
+        </ion-badge>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

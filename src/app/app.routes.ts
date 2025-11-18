@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -33,5 +33,9 @@ export const routes: Routes = [
   {
     path: 'os-chamado-home',
     loadComponent: () => import('./os-chamado-home/os-chamado-home.page').then( m => m.OsChamadoHomePage)
+  },
+  {
+    path: 'home-config',
+    loadComponent: () => import('./home-config/home-config.page').then( m => m.HomeConfigPage)
   },
 ];

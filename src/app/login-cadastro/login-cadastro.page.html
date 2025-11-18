@@ -66,6 +66,17 @@
         <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
         }
       </ion-button>
+
+
+      <!-- Botão Voltar para a Página Anterior (SÓ APARECE NO PASSO 1) -->
+      @if (currentStep() === 1) {
+      <ion-button expand="block" fill="outline" color="medium" (click)="goBack()"
+        class="ion-margin-top h-12 rounded-xl border border-gray-300 transition duration-300 ease-in-out hover:bg-gray-100">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Voltar para a Página Anterior
+      </ion-button>
+      }
+      
     </div>
   </div>
 </ion-content>

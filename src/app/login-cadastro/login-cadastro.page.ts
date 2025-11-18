@@ -14,7 +14,6 @@ import {
   IonText,
   IonProgressBar,
   IonItem,
-  IonList,
   IonButtons
 } from '@ionic/angular/standalone';
 
@@ -25,7 +24,7 @@ import {
   arrowBack,
   keyOutline,
   businessOutline,
-  checkmarkCircleOutline
+  checkmarkCircleOutline, arrowBackOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -47,7 +46,6 @@ import {
     IonText,
     IonProgressBar,
     IonItem,
-    IonList,
     IonButtons
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -90,7 +88,7 @@ export class LoginCadastroPage implements OnInit {
 
   constructor() {
     // REGISTRO DOS ÍCONES
-    addIcons({ arrowBack, businessOutline, keyOutline, checkmarkCircleOutline });
+    addIcons({ arrowBack, businessOutline, keyOutline, checkmarkCircleOutline, arrowBackOutline });
   }
 
   ngOnInit() { }
@@ -167,5 +165,10 @@ export class LoginCadastroPage implements OnInit {
   finalLogin() {
     console.log('Login bem-sucedido! Redirecionando para /home.');
     this.navCtrl.navigateRoot('/home');
+  }
+
+  goBack() {
+    // Esta função será executada ao clicar no novo botão
+    this.navCtrl.back();
   }
 }

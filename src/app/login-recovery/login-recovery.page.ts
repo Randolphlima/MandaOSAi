@@ -4,11 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButtons,
-  IonBackButton,
   IonIcon, // Adicione IonIcon
   IonButton,
   IonInput
@@ -21,13 +16,8 @@ import {
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
-    IonButtons,
-    IonBackButton,
     IonIcon, // Certifique-se que IonIcon está aqui
     IonButton,
     IonInput

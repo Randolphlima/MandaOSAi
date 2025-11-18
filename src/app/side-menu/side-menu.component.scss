@@ -1,0 +1,51 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* header */
+.menu-header {
+    text-align: center;
+    padding: 20px 12px;
+    background: var(--ion-background-color);
+}
+
+.menu-header ion-avatar {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.menu-header h2 {
+    margin: 6px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.menu-header p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ion-color-medium);
+}
+
+/* lista ocupa o centro, deixando footer fixo embaixo */
+ion-list {
+    flex: 1 1 auto;
+    overflow: auto;
+    padding-top: 8px;
+}
+
+/* footer fixo no final */
+.menu-footer {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 13px;
+    color: var(--ion-color-medium);
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    background: transparent;
+}
