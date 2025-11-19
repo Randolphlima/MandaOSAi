@@ -1,4 +1,6 @@
-/* TOPO GRADIENTE (RETO) */
+@import "leaflet/dist/leaflet.css";
+
+/* topo */
 .header-gradiente {
     background: linear-gradient(180deg, #7b2ff7, #9c4dff);
     height: 220px;
@@ -7,11 +9,9 @@
     padding-top: 25px;
     position: relative;
     border-radius: 0 !important;
-    /* garante que fique reto */
 }
 
-
-/* Botão voltar */
+/* botão voltar */
 .btn-voltar {
     position: absolute;
     top: 10px;
@@ -20,14 +20,14 @@
     font-size: 32px;
 }
 
-/* ID do chamado */
+/* id do chamado */
 .id-chamado {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
 }
 
-/* Badge de status */
+/* badge */
 .status-badge {
     margin-top: 10px;
     padding: 6px 12px;
@@ -37,7 +37,7 @@
     border-radius: 8px;
 }
 
-/* Ícones das abas */
+/* ícones abas */
 .tabs-icones {
     margin-top: 25px;
     display: flex;
@@ -57,45 +57,48 @@
     color: #ffffff;
 }
 
-/* CARD BRANCO ARREDONDADO */
 .conteudo-card {
     background: white;
     margin-top: -40px;
-    /* faz o branco “invadir” o roxo */
     border-radius: 35px 35px 0 0;
-    /* arredondado apenas no topo */
-    padding: 25px;
+    padding: 25px; // padding padrão
     position: relative;
     z-index: 2;
+    transition: padding 0.2s;
 }
+
+/* remove padding só para o mapa */
+.conteudo-card.sem-padding {
+    padding: 0;
+}
+
+
+
 
 ion-content {
     --background: #ffffff !important;
 }
 
-
-/* Campos */
+/* campos */
 .info-bloco {
     margin-bottom: 15px;
 }
 
-.info-bloco label {
-    font-size: 12px;
-    font-weight: bold;
-    color: #777;
+.readonly-text .texto {
+    padding-top: 12px;
+    white-space: pre-wrap;
 }
 
-.info-bloco p {
-    margin: 3px 0;
-    font-size: 14px;
-    font-weight: 500;
+.linha-dupla {
+    display: flex;
+    gap: 12px;
 }
 
-.centro {
-    text-align: center;
-    padding: 20px;
+.linha-dupla ion-item {
+    flex: 1;
 }
 
+/* WHATSAPP */
 .btn-whatsapp {
     --padding-start: 0;
     --padding-end: 0;
@@ -111,25 +114,61 @@ ion-content {
     font-size: 38px !important;
 }
 
-.readonly-text .texto {
-    padding-top: 12px;
-    white-space: pre-wrap;
-    border-bottom: 1px #000000;
+.mapa-container {
+    width: 100%;
+    height: calc(100vh - 220px); // altura total menos topo do header
+    background: #f3f3f3;
+    overflow: hidden;
+    border-radius: 0; // remove borda arredondada para fullscreen
 }
 
-.linha-dupla {
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Remove padding e faz o mapa ocupar toda área do card */
+.mapa-fullscreen {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 220px);
+    /* altura total menos header */
+    border-radius: 0;
+    /* sem arredondamento */
+    overflow: hidden;
+    margin-top: 0;
+    padding: 0;
+    border-radius: 35px 35px 0 0;
+}
+
+/* Mapa ocupa toda a div */
+.mapa-fullscreen #map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Botão fixo centralizado no bottom do mapa */
+.btn-navegar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    --background: #25D366;
+    color: white;
+}
+
+
+.fotos-container {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
 }
 
-.linha-dupla ion-item {
-    flex: 1;
-}
-
-.badge-conexao ion-badge {
-    padding: 6px 12px !important;
-    font-size: 14px !important;
-    border-radius: 6px !important;
-    height: auto !important;
-    width: auto !important;
+.foto-anexada {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    object-fit: cover;
 }

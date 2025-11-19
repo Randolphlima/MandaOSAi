@@ -15,27 +15,19 @@
 
     <!-- ICONES -->
     <div class="tabs-icones">
-      <ion-icon name="people-outline" [class.active]="aba == 'dados'" (click)="aba = 'dados'">
-      </ion-icon>
+      <ion-icon name="people-outline" [class.active]="aba == 'dados'" (click)="alterarAba('dados')"></ion-icon>
+      <ion-icon name="construct-outline" [class.active]="aba == 'tecnico'" (click)="alterarAba('tecnico')"></ion-icon>
+      <ion-icon name="location-outline" [class.active]="aba == 'local'" (click)="alterarAba('local')"></ion-icon>
+      <ion-icon name="camera-outline" [class.active]="aba == 'foto'" (click)="alterarAba('foto')"></ion-icon>
+      <ion-icon name="create-outline" [class.active]="aba == 'assinatura'"
+        (click)="alterarAba('assinatura')"></ion-icon>
 
-      <ion-icon name="construct-outline" [class.active]="aba == 'tecnico'" (click)="aba = 'tecnico'">
-      </ion-icon>
-
-      <ion-icon name="location-outline" [class.active]="aba == 'local'" (click)="aba = 'local'">
-      </ion-icon>
-
-      <ion-icon name="camera-outline" [class.active]="aba == 'foto'" (click)="aba = 'foto'">
-      </ion-icon>
-
-      <ion-icon name="create-outline" [class.active]="aba == 'assinatura'" (click)="aba = 'assinatura'">
-      </ion-icon>
     </div>
 
-  </div>
-
+  </div> <!-- 👈 FECHAMENTO QUE FALTAVA AQUI !! -->
 
   <!-- CARD BRANCO ARREDONDADO -->
-  <div class="conteudo-card">
+  <div class="conteudo-card" [class.sem-padding]="aba === 'local'">
 
     <!-- ABA DADOS PESSOAIS -->
     <div *ngIf="aba == 'dados'">
@@ -66,8 +58,7 @@
           <ion-label position="stacked">CONTATO</ion-label>
 
           <!-- INPUT READONLY + CLIQUE PARA LIGAR -->
-          <ion-input readonly [value]="chamado?.contato" (click)="ligar(chamado?.contato)">
-          </ion-input>
+          <ion-input readonly [value]="chamado?.contato" (click)="ligar(chamado?.contato)"></ion-input>
 
           <!-- BOTÃO WHATSAPP -->
           <ion-button fill="clear" slot="end" class="btn-whatsapp" (click)="abrirWhatsApp(chamado?.contato)">
@@ -77,15 +68,12 @@
         </ion-item>
       </div>
 
-
       <div class="info-bloco">
         <ion-item lines="none" class="readonly-text">
           <ion-label position="stacked">DESCRIÇÃO DO CHAMADO</ion-label>
           <div class="texto">{{ chamado?.descricao }}</div>
         </ion-item>
       </div>
-
-
 
     </div>
 
@@ -109,7 +97,6 @@
               </ion-badge>
             </div>
           </ion-item>
-
 
         </div>
       </div>
@@ -162,16 +149,36 @@
 
     </div>
 
-
     <!-- ABA MAPA -->
-    <div *ngIf="aba == 'local'" class="centro">
-      <p>Mapa aqui (OpenStreetMap)…</p>
+    <div *ngIf="aba === 'local'" class="mapa-fullscreen">
+      <div id="map"></div>
+
+      <!-- Botão de navegação -->
+      <ion-button fill="solid" class="btn-navegar" (click)="abrirMapaExterno()">
+        Abrir no mapa
+      </ion-button>
     </div>
+
+
 
     <!-- ABA FOTO -->
-    <div *ngIf="aba == 'foto'" class="centro">
-      <p>Fotos do chamado…</p>
+    <div *ngIf="aba == 'foto'" class="centro fotos-container">
+      <ion-button (click)="tirarFotoMobile()" expand="full">📷 Tirar Foto</ion-button>
+      <ion-button (click)="escolherFotoMobile()" expand="full" color="secondary">🖼️ Escolher da Galeria</ion-button>
+
+      <!-- fallback para navegador -->
+      <input type="file" accept="image/*" multiple (change)="onFileSelected($event)" />
+
+      <ion-grid *ngIf="fotos.length > 0">
+        <ion-row>
+          <ion-col size="6" *ngFor="let foto of fotos">
+            <img [src]="foto" class="foto-anexada" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
+
+
 
     <!-- ABA ASSINATURA -->
     <div *ngIf="aba == 'assinatura'" class="centro">

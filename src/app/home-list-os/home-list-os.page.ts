@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  CommonModule, LowerCasePipe, UpperCasePipe
+  CommonModule, UpperCasePipe
 } from '@angular/common';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
   IonButtons, IonButton, IonMenuButton, IonIcon,
-  IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
+  IonCard, IonCardContent, IonCardHeader,
   IonCardTitle, IonCol, IonGrid, IonRow, IonBadge
 } from '@ionic/angular/standalone';
 
@@ -18,9 +18,8 @@ import {
   imports: [
     IonHeader, IonToolbar, IonTitle, IonContent,
     IonButtons, IonButton, IonMenuButton, IonIcon,
-    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonRow, IonBadge,
-    LowerCasePipe, UpperCasePipe, CommonModule
+    IonCard, IonCardContent, IonCardHeader,
+    IonCardTitle, IonCol, IonGrid, IonRow, IonBadge, UpperCasePipe, CommonModule
   ]
 })
 export class HomeListOsPage {
