@@ -4,10 +4,10 @@
   <div class="header-gradiente">
 
     <ion-button fill="clear" class="btn-voltar" (click)="voltar()">
-      <ion-icon name="close-outline"></ion-icon>
+      <ion-icon name="close-outline" style="font-size: 30px;"></ion-icon>
     </ion-button>
 
-    <h2 class="id-chamado">CHAMADO ID#{{ chamado?.id }}</h2>
+    <h2 class="id-chamado">O.S - {{ chamado?.id }}</h2>
 
     <ion-badge class="status-badge">
       {{ chamado?.status }}
@@ -79,14 +79,10 @@
 
 
       <div class="info-bloco">
-        <div class="info-bloco">
-          <ion-item lines="none" class="readonly-text">
-            <ion-label position="stacked">DESCRIÇÃO DO CHAMADO</ion-label>
-            <div class="texto">{{ chamado?.descricao }}</div>
-          </ion-item>
-        </div>
-
-
+        <ion-item lines="none" class="readonly-text">
+          <ion-label position="stacked">DESCRIÇÃO DO CHAMADO</ion-label>
+          <div class="texto">{{ chamado?.descricao }}</div>
+        </ion-item>
       </div>
 
 
@@ -94,9 +90,78 @@
     </div>
 
     <!-- ABA DADOS TÉCNICOS -->
-    <div *ngIf="aba == 'tecnico'" class="centro">
-      <p>Dados técnicos aqui...</p>
+    <div *ngIf="aba == 'tecnico'">
+
+      <!-- LINHA 1 -->
+      <div class="info-bloco">
+        <div class="linha-dupla">
+          <ion-item>
+            <ion-label position="stacked">PLANO</ion-label>
+            <ion-input readonly value="500MB"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">CONEXÃO</ion-label>
+
+            <div class="badge-conexao">
+              <ion-badge [color]="chamado?.conexao === 'Online' ? 'success' : 'danger'">
+                {{ chamado?.conexao || 'Sem dado' }}
+              </ion-badge>
+            </div>
+          </ion-item>
+
+
+        </div>
+      </div>
+
+      <!-- LINHA 2 -->
+      <div class="info-bloco">
+        <div class="linha-dupla">
+          <ion-item>
+            <ion-label position="stacked">STATUS</ion-label>
+            <ion-input readonly value="Ativo"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">CONTRATO</ion-label>
+            <ion-input readonly value="23"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+
+      <!-- LINHA 3 -->
+      <div class="info-bloco">
+        <div class="linha-dupla">
+          <ion-item>
+            <ion-label position="stacked">DOWNLOAD</ion-label>
+            <ion-input readonly value="500Mbps"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">UPLOAD</ion-label>
+            <ion-input readonly value="200Mbps"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+
+      <!-- PPPoE USUÁRIO -->
+      <div class="info-bloco">
+        <ion-item button (click)="copiarTexto('asdaij2@goytanet.com.br')">
+          <ion-label position="stacked">USUÁRIO PPPoE</ion-label>
+          <ion-input readonly value="asdaij2@goytanet.com.br"></ion-input>
+        </ion-item>
+      </div>
+
+      <!-- PPPoE SENHA -->
+      <div class="info-bloco">
+        <ion-item button (click)="copiarTexto('asdaij2@goytanet.com.br')">
+          <ion-label position="stacked">SENHA PPPoE</ion-label>
+          <ion-input readonly value="asdaij2@goytanet.com.br"></ion-input>
+        </ion-item>
+      </div>
+
     </div>
+
 
     <!-- ABA MAPA -->
     <div *ngIf="aba == 'local'" class="centro">

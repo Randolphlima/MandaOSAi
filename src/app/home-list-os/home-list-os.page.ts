@@ -35,7 +35,8 @@ export class HomeListOsPage {
       endereco: 'Rua Oscar Machado 135, 5 IPS',
       complemento: 'Bloco A APT 10',
       status: 'FINALIZADO',
-      contato: '5522998536554'
+      contato: '5522998536554',
+      conexao: 'Offline'
     },
     {
       id: 2,
@@ -44,7 +45,8 @@ export class HomeListOsPage {
       endereco: 'Av. Rosa Lima 455, Parque Califórnia',
       complemento: 'Portão Branco',
       status: 'ABERTO',
-      contato: '5522998536554'
+      contato: '5522998536554',
+      conexao: 'Offline'
     },
     {
       id: 3,
@@ -53,7 +55,8 @@ export class HomeListOsPage {
       endereco: 'RUA OSCAR MACHADO 209 CTO: 21°4652.04S 41°1933.46W PARQUE ROSÁRIO, CAMPOS DOS GOYTACAZES-RJ',
       complemento: 'AO LADO DA BARBEARIA SOUZA CASA DO MEIO ',
       status: 'PRIORIDADE',
-      contato: '5522998536554'
+      contato: '5522998536554',
+      conexao: 'Online'
     },
     {
       id: 4,
@@ -62,7 +65,8 @@ export class HomeListOsPage {
       endereco: 'Travessa Carmem Careiro, 47, PQ PRESIDENTE VARGAS',
       complemento: 'Casa',
       status: 'PENDENTE',
-      contato: '5522998536554'
+      contato: '5522998536554',
+      conexao: 'Online'
     }
   ];
 

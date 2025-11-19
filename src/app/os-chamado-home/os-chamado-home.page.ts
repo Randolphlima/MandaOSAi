@@ -39,6 +39,7 @@ import {
 })
 export class OsChamadoHomePage {
 
+  
   chamado: any;
   aba = "dados";
 
@@ -62,4 +63,8 @@ export class OsChamadoHomePage {
     window.open(`https://wa.me/${celular}?text=${msg}`, '_system');
   }
 
+  copiarTexto(valor: string) {
+    navigator.clipboard.writeText(valor);
+  }
+  
 }
