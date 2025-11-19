@@ -1,13 +1,118 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>os-chamado-home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">os-chamado-home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- TOPO COM GRADIENTE -->
+  <div class="header-gradiente">
+
+    <ion-button fill="clear" class="btn-voltar" (click)="voltar()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+
+    <h2 class="id-chamado">CHAMADO ID#{{ chamado?.id }}</h2>
+
+    <ion-badge class="status-badge">
+      {{ chamado?.status }}
+    </ion-badge>
+
+    <!-- ICONES -->
+    <div class="tabs-icones">
+      <ion-icon name="people-outline" [class.active]="aba == 'dados'" (click)="aba = 'dados'">
+      </ion-icon>
+
+      <ion-icon name="construct-outline" [class.active]="aba == 'tecnico'" (click)="aba = 'tecnico'">
+      </ion-icon>
+
+      <ion-icon name="location-outline" [class.active]="aba == 'local'" (click)="aba = 'local'">
+      </ion-icon>
+
+      <ion-icon name="camera-outline" [class.active]="aba == 'foto'" (click)="aba = 'foto'">
+      </ion-icon>
+
+      <ion-icon name="create-outline" [class.active]="aba == 'assinatura'" (click)="aba = 'assinatura'">
+      </ion-icon>
+    </div>
+
+  </div>
+
+
+  <!-- CARD BRANCO ARREDONDADO -->
+  <div class="conteudo-card">
+
+    <!-- ABA DADOS PESSOAIS -->
+    <div *ngIf="aba == 'dados'">
+
+      <div class="info-bloco">
+        <ion-item>
+          <ion-label position="stacked">NOME</ion-label>
+          <ion-input [value]="chamado?.nome" readonly></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="info-bloco">
+        <ion-item lines="none" class="readonly-text">
+          <ion-label position="stacked">ENDEREÇO</ion-label>
+          <div class="texto">{{ chamado?.endereco }}</div>
+        </ion-item>
+      </div>
+
+      <div class="info-bloco">
+        <ion-item lines="none" class="readonly-text">
+          <ion-label position="stacked">COMPLEMENTO</ion-label>
+          <div class="texto">{{ chamado?.complemento }}</div>
+        </ion-item>
+      </div>
+
+      <div class="info-bloco">
+        <ion-item lines="full">
+          <ion-label position="stacked">CONTATO</ion-label>
+
+          <!-- INPUT READONLY + CLIQUE PARA LIGAR -->
+          <ion-input readonly [value]="chamado?.contato" (click)="ligar(chamado?.contato)">
+          </ion-input>
+
+          <!-- BOTÃO WHATSAPP -->
+          <ion-button fill="clear" slot="end" class="btn-whatsapp" (click)="abrirWhatsApp(chamado?.contato)">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </ion-button>
+
+        </ion-item>
+      </div>
+
+
+      <div class="info-bloco">
+        <div class="info-bloco">
+          <ion-item lines="none" class="readonly-text">
+            <ion-label position="stacked">DESCRIÇÃO DO CHAMADO</ion-label>
+            <div class="texto">{{ chamado?.descricao }}</div>
+          </ion-item>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+    <!-- ABA DADOS TÉCNICOS -->
+    <div *ngIf="aba == 'tecnico'" class="centro">
+      <p>Dados técnicos aqui...</p>
+    </div>
+
+    <!-- ABA MAPA -->
+    <div *ngIf="aba == 'local'" class="centro">
+      <p>Mapa aqui (OpenStreetMap)…</p>
+    </div>
+
+    <!-- ABA FOTO -->
+    <div *ngIf="aba == 'foto'" class="centro">
+      <p>Fotos do chamado…</p>
+    </div>
+
+    <!-- ABA ASSINATURA -->
+    <div *ngIf="aba == 'assinatura'" class="centro">
+      <p>Assinatura digital…</p>
+    </div>
+
+  </div>
+
 </ion-content>

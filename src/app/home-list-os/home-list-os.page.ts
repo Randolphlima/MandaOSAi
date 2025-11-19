@@ -1,24 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, LowerCasePipe, UpperCasePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonButtons,
-  IonButton,
-  IonMenuButton,
-  IonIcon,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCol,
-  IonGrid,
-  IonRow,
-  IonBadge
+  CommonModule, LowerCasePipe, UpperCasePipe
+} from '@angular/common';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonButtons, IonButton, IonMenuButton, IonIcon,
+  IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
+  IonCardTitle, IonCol, IonGrid, IonRow, IonBadge
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -27,34 +16,59 @@ import {
   styleUrls: ['./home-list-os.page.scss'],
   standalone: true,
   imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButtons,
-    IonButton,
-    IonMenuButton,
-    IonIcon,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCol,
-    IonGrid,
-    IonRow,
-    LowerCasePipe, 
-    UpperCasePipe,
-    IonBadge
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonButtons, IonButton, IonMenuButton, IonIcon,
+    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
+    IonCardTitle, IonCol, IonGrid, IonRow, IonBadge,
+    LowerCasePipe, UpperCasePipe, CommonModule
   ]
 })
 export class HomeListOsPage {
 
-  public chamado = {
-  nome: 'Randolph Rodrigues Ribeiro Lima',
-  descricao: 'Cliente sem conexão. Verificar roteador com defeito.',
-  endereco: 'Rua Oscar Machado 135, Bloco A APT 105 IPS. Campos dos Goytacazes RJ',
-  status: 'FINALIZADO' // Mude para 'ABERTO' para ver a cor vermelha (se você implementar o CSS para aberto)
-};
+  constructor(private router: Router) { }
 
- }
+  public chamados = [
+    {
+      id: 1,
+      nome: 'Randolph Rodrigues Ribeiro Lima',
+      descricao: 'Cliente sem conexão. Verificar roteador com defeito.',
+      endereco: 'Rua Oscar Machado 135, 5 IPS',
+      complemento: 'Bloco A APT 10',
+      status: 'FINALIZADO',
+      contato: '5522998536554'
+    },
+    {
+      id: 2,
+      nome: 'Maria da Silva',
+      descricao: 'Lentidão na rede. Necessário testar ONU.',
+      endereco: 'Av. Rosa Lima 455, Parque Califórnia',
+      complemento: 'Portão Branco',
+      status: 'ABERTO',
+      contato: '5522998536554'
+    },
+    {
+      id: 3,
+      nome: 'RAPHAEL CHAGAS DE SOUSA',
+      descricao: 'INSTALAÇÃO ISENTO DA TAXA.',
+      endereco: 'RUA OSCAR MACHADO 209 CTO: 21°4652.04S 41°1933.46W PARQUE ROSÁRIO, CAMPOS DOS GOYTACAZES-RJ',
+      complemento: 'AO LADO DA BARBEARIA SOUZA CASA DO MEIO ',
+      status: 'PRIORIDADE',
+      contato: '5522998536554'
+    },
+    {
+      id: 4,
+      nome: 'Jacinaide Lima de Moura de Freitas',
+      descricao: 'INSTALAÇÃO ISENTO DA TAXA.',
+      endereco: 'Travessa Carmem Careiro, 47, PQ PRESIDENTE VARGAS',
+      complemento: 'Casa',
+      status: 'PENDENTE',
+      contato: '5522998536554'
+    }
+  ];
+
+  abrirChamado(chamado: any) {
+    this.router.navigate(['/os-chamado-home'], {
+      state: { chamado }
+    });
+  }
+}

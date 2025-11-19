@@ -12,15 +12,15 @@
 .status-card-finalizado {
     --background: #e0f2e8;
     /* Fundo verde claro */
-    border-left: 8px solid #388e3c;
+    border-left: 4px solid #388e3c;
     /* Borda lateral verde escura */
 }
 
 /* Azul = Instalação */
-.status-card-instalação {
+.status-card-aberto {
     --background: #e3f2fd;
     /* Fundo azul claro */
-    border-left: 8px solid #1976d2;
+    border-left: 4px solid #1976d2;
     /* Borda lateral azul escura */
 }
 
@@ -28,15 +28,15 @@
 .status-card-prioridade {
     --background: #fde0e0;
     /* Fundo vermelho claro */
-    border-left: 8px solid #d32f2f;
+    border-left: 4px solid #d32f2f;
     /* Borda lateral vermelha escura */
 }
 
 /* Laranja = Manutenção */
-.status-card-manutenção {
+.status-card-pendente {
     --background: #fff3e0;
     /* Fundo laranja claro */
-    border-left: 8px solid #f57c00;
+    border-left: 4px solid #f57c00;
     /* Borda lateral laranja escura */
 }
 
@@ -62,7 +62,7 @@
     --color: white;
 }
 
-.status-card-instalação .status-button[disabled] {
+.status-card-aberto .status-button[disabled] {
     --background: #1976d2;
     /* Azul */
     --color: white;
@@ -74,7 +74,7 @@
     --color: white;
 }
 
-.status-card-manutenção .status-button[disabled] {
+.status-card-pendente .status-button[disabled] {
     --background: #f57c00;
     /* Laranja */
     --color: white;

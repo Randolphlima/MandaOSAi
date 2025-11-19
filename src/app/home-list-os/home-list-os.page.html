@@ -17,7 +17,7 @@
 
 <ion-content class="ion-padding">
 
-  <!-- Botões aqui -->
+  <!-- Botões -->
   <ion-grid>
     <ion-row>
       <ion-col size="4">
@@ -34,27 +34,24 @@
     </ion-row>
   </ion-grid>
 
+  <!-- Lista de chamados -->
+  <ion-card *ngFor="let c of chamados" class="status-card-{{c.status.toLowerCase()}}" (click)="abrirChamado(c)">
 
-  <ion-card class="status-card-{{chamado.status.toLowerCase()}}">
     <ion-card-header>
-      <ion-card-title>{{chamado.nome}}</ion-card-title>
+      <ion-card-title>{{c.nome}}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p>
-        Chamado: {{chamado.descricao}}
-      </p>
-      <p>
-        Endereço: {{chamado.endereco}}
-      </p>
+      <p>Chamado: {{c.descricao}}</p>
+      <p>Endereço: {{c.endereco}}</p>
 
       <div class="card-footer">
         <ion-badge class="status-button" disabled>
-          {{chamado.status | uppercase}}
+          {{c.status | uppercase}}
         </ion-badge>
       </div>
-
     </ion-card-content>
+
   </ion-card>
 
 </ion-content>

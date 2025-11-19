@@ -1,0 +1,117 @@
+/* TOPO GRADIENTE (RETO) */
+.header-gradiente {
+    background: linear-gradient(180deg, #7b2ff7, #9c4dff);
+    height: 220px;
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+    position: relative;
+    border-radius: 0 !important;
+    /* garante que fique reto */
+}
+
+
+/* Botão voltar */
+.btn-voltar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    --color: white;
+}
+
+/* ID do chamado */
+.id-chamado {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Badge de status */
+.status-badge {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Ícones das abas */
+.tabs-icones {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 30px;
+}
+
+.tabs-icones ion-icon {
+    font-size: 32px;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+.tabs-icones ion-icon.active {
+    opacity: 1;
+    transform: scale(1.1);
+    color: #ffffff;
+}
+
+/* CARD BRANCO ARREDONDADO */
+.conteudo-card {
+    background: white;
+    margin-top: -40px;
+    /* faz o branco “invadir” o roxo */
+    border-radius: 35px 35px 0 0;
+    /* arredondado apenas no topo */
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+ion-content {
+    --background: #ffffff !important;
+}
+
+
+/* Campos */
+.info-bloco {
+    margin-bottom: 15px;
+}
+
+.info-bloco label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #777;
+}
+
+.info-bloco p {
+    margin: 3px 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.centro {
+    text-align: center;
+    padding: 20px;
+}
+
+.btn-whatsapp {
+    --padding-start: 0;
+    --padding-end: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --color: #25D366;
+}
+
+.btn-whatsapp ion-icon {
+    font-size: 38px !important;
+}
+
+.readonly-text .texto {
+  padding-top: 12px;
+  white-space: pre-wrap;
+  border-bottom: 1px #000000;
+}
