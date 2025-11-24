@@ -221,3 +221,18 @@ ion-content {
     padding: 0;
     overflow-y: hidden;
 }
+
+.assinatura-container {
+    width: 100%;
+    height: 250px;
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#canvasAssinatura {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}

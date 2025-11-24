@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core'; // Adicionado ChangeDetectorRef
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
@@ -50,24 +50,34 @@ export class OsChamadoHomePage implements ViewDidEnter {
   private mapLoaded = false;
   private storageKey: string = '';
 
+  // --- Assinatura Digital ---
+  private canvas!: HTMLCanvasElement;
+  private ctx!: CanvasRenderingContext2D | null;
+  private desenhando = false;
+
+  assinaturaKey = '';
+  assinaturaBase64: string | null = null;
+
   constructor(
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController,
     private actionSheetController: ActionSheetController,
-    private cd: ChangeDetectorRef // Injetado ChangeDetectorRef
+    private cd: ChangeDetectorRef
   ) {
     const nav = this.router.getCurrentNavigation();
     this.chamado = nav?.extras.state?.['chamado'];
 
     if (this.chamado?.id) {
       this.storageKey = `fotos_chamado_${this.chamado.id}`;
+      this.assinaturaKey = `assinatura_chamado_${this.chamado.id}`;
     }
+
     this.carregarFotosDoCache();
+    this.carregarAssinaturaDoCache();
   }
 
-  // --- Métodos do Ciclo de Vida e Abas ---
-
+  // --- Ciclo de Vida ---
   ionViewWillLeave(): void {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
@@ -81,6 +91,9 @@ export class OsChamadoHomePage implements ViewDidEnter {
     if (this.aba === 'foto') {
       this.carregarFotosDoCache();
     }
+    if (this.aba === 'assinatura') {
+      setTimeout(() => this.inicializarCanvasAssinatura(), 200);
+    }
   }
 
   alterarAba(valor: string): void {
@@ -88,29 +101,34 @@ export class OsChamadoHomePage implements ViewDidEnter {
       document.activeElement.blur();
     }
     this.aba = valor;
+
     if (valor === 'local') {
       setTimeout(() => this.inicializarMapa(), 300);
     } else if (valor === 'foto') {
       this.carregarFotosDoCache();
+    } else if (valor === 'assinatura') {
+      setTimeout(() => this.inicializarCanvasAssinatura(), 200);
     }
   }
 
-  // 📦 Métodos de Cache
+  // ───────────────────────────────────────────────
+  //  📦 CACHE FOTOS
+  // ───────────────────────────────────────────────
+
   private async salvarFotosNoCache(): Promise<void> {
     if (!this.storageKey || !this.chamado?.status) return;
 
     const status = this.chamado.status.toLowerCase();
 
-    if (status === 'aberto' || status === 'pendente' || status === 'prioridade' || status === 'instalacao') {
+    if (['aberto', 'pendente', 'prioridade', 'instalacao'].includes(status)) {
       try {
         localStorage.setItem(this.storageKey, JSON.stringify(this.fotos));
-        console.log('Fotos salvas no cache interno. Status:', status);
+        console.log('Fotos salvas no cache interno.');
       } catch (error) {
         console.error('Erro ao salvar no localStorage:', error);
       }
     } else if (status === 'finalizado') {
-      console.log('Chamado Finalizado. Iniciando UPLOAD para o servidor...');
-      // Lógica de UPLOAD aqui
+      console.log('Chamado Finalizado. UPLOAD...');
     }
   }
 
@@ -118,52 +136,29 @@ export class OsChamadoHomePage implements ViewDidEnter {
     if (!this.storageKey) return;
     try {
       const fotosSalvas = localStorage.getItem(this.storageKey);
-      if (fotosSalvas) {
-        this.fotos = JSON.parse(fotosSalvas);
-      } else {
-        this.fotos = [];
-      }
-    } catch (error) {
-      console.error('Erro ao carregar do localStorage:', error);
+      this.fotos = fotosSalvas ? JSON.parse(fotosSalvas) : [];
+    } catch {
       this.fotos = [];
     }
   }
 
-  // 🖼️ Ação única de Captura/Escolha
+  // 🖼️ Foto: Captura ou Galeria
   async capturarOuEscolherFoto() {
     const alert = await this.alertController.create({
       header: 'Enviar Foto',
-      message: 'Escolha a fonte da imagem para o chamado:',
+      message: 'Escolha a fonte:',
       buttons: [
-        {
-          text: 'Câmera 📷',
-          handler: () => {
-            this.processarFoto(CameraSource.Camera);
-          },
-        },
-        {
-          text: 'Galeria 🖼️',
-          handler: () => {
-            this.processarFoto(CameraSource.Photos);
-          },
-        },
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
+        { text: 'Câmera 📷', handler: () => this.processarFoto(CameraSource.Camera) },
+        { text: 'Galeria 🖼️', handler: () => this.processarFoto(CameraSource.Photos) },
+        { text: 'Cancelar', role: 'cancel' },
       ],
     });
-
     await alert.present();
   }
 
   private async processarFoto(source: CameraSource) {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-
     const loading = await this.loadingController.create({
-      message: 'Processando e salvando foto...',
+      message: 'Processando...',
     });
     await loading.present();
 
@@ -175,11 +170,8 @@ export class OsChamadoHomePage implements ViewDidEnter {
       });
 
       if (foto.dataUrl) {
-        // Usa o spread operator para nova referência
         this.fotos = [...this.fotos, foto.dataUrl];
         await this.salvarFotosNoCache();
-
-        // NOVO: Força o Angular a detectar a mudança na variável this.fotos imediatamente
         this.cd.detectChanges();
       }
     } catch (err) {
@@ -189,7 +181,7 @@ export class OsChamadoHomePage implements ViewDidEnter {
     }
   }
 
-  // 👁️ Ação ao clicar na miniatura (Abre ActionSheet com as 3 opções)
+  // 🗑️ Remover Foto
   async acaoMiniatura(dataUrl: string, index: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opções da Foto',
@@ -198,59 +190,127 @@ export class OsChamadoHomePage implements ViewDidEnter {
           text: 'Excluir Foto',
           role: 'destructive',
           icon: 'trash-outline',
-          handler: () => {
-            this.confirmarExclusao(index);
-          },
+          handler: () => this.confirmarExclusao(index),
         },
-        {
-          text: 'Cancelar',
-          icon: 'close',
-          role: 'cancel',
-        },
+        { text: 'Cancelar', icon: 'close', role: 'cancel' }
       ],
     });
     await actionSheet.present();
   }
 
-  // ❌ Alerta de Confirmação de Exclusão
   async confirmarExclusao(index: number) {
     const alert = await this.alertController.create({
-      header: 'Confirmação de Exclusão',
-      message: 'Tem certeza que deseja excluir esta foto do chamado? Esta ação é irreversível.',
+      header: 'Confirmar Exclusão',
+      message: 'Deseja excluir esta foto?',
       buttons: [
-        {
-          text: 'Não',
-          role: 'cancel',
-        },
-        {
-          text: 'Sim, Excluir',
-          handler: () => {
-            this.removerFoto(index);
-          },
-        }
+        { text: 'Não', role: 'cancel' },
+        { text: 'Sim', handler: () => this.removerFoto(index) }
       ]
     });
     await alert.present();
   }
 
-  // ❌ Remover Foto (Chamado por confirmarExclusao)
   async removerFoto(index: number) {
     this.fotos.splice(index, 1);
     await this.salvarFotosNoCache();
-
-    // NOVO: Força a atualização da view após a remoção da foto do array
     this.cd.detectChanges();
   }
 
-  // 🗑️ Método para limpar o cache 
-  async limparCacheFotos() {
-    if (!this.storageKey) return;
-    localStorage.removeItem(this.storageKey);
-    this.fotos = [];
-    console.log('Cache de fotos limpo.');
+  // ───────────────────────────────────────────────
+  //  ✍️ ASSINATURA DIGITAL
+  // ───────────────────────────────────────────────
+
+  inicializarCanvasAssinatura() {
+    this.canvas = document.getElementById('canvasAssinatura') as HTMLCanvasElement;
+    if (!this.canvas) return;
+
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight;
+
+    this.ctx = this.canvas.getContext('2d');
+
+    // Recarregar assinatura existente
+    if (this.assinaturaBase64) {
+      const img = new Image();
+      img.onload = () => this.ctx?.drawImage(img, 0, 0);
+      img.src = this.assinaturaBase64;
+    }
+
+    // Eventos Touch
+    this.canvas.addEventListener('touchstart', (e) => this.iniciarDesenho(e));
+    this.canvas.addEventListener('touchmove', (e) => this.desenhar(e));
+    this.canvas.addEventListener('touchend', () => this.pararDesenho());
+
+    // Eventos Mouse
+    this.canvas.addEventListener('mousedown', (e) => this.iniciarDesenho(e));
+    this.canvas.addEventListener('mousemove', (e) => this.desenhar(e));
+    this.canvas.addEventListener('mouseup', () => this.pararDesenho());
+    this.canvas.addEventListener('mouseleave', () => this.pararDesenho());
   }
 
-  // --- Métodos de Mapa e Comunicação (inalterados) ---
+  iniciarDesenho(event: any) {
+    this.desenhando = true;
+    this.ctx!.beginPath();
+
+    this.ctx!.moveTo(
+      event.offsetX ?? event.touches[0].clientX - this.canvas.getBoundingClientRect().left,
+      event.offsetY ?? event.touches[0].clientY - this.canvas.getBoundingClientRect().top
+    );
+  }
+
+  desenhar(event: any) {
+    if (!this.desenhando) return;
+    event.preventDefault();
+
+    const x = event.offsetX ?? event.touches[0].clientX - this.canvas.getBoundingClientRect().left;
+    const y = event.offsetY ?? event.touches[0].clientY - this.canvas.getBoundingClientRect().top;
+
+    this.ctx!.lineWidth = 2;
+    this.ctx!.lineCap = 'round';
+    this.ctx!.strokeStyle = '#000';
+
+    this.ctx!.lineTo(x, y);
+    this.ctx!.stroke();
+  }
+
+  pararDesenho() {
+    this.desenhando = false;
+  }
+
+  limparAssinatura() {
+    if (!this.ctx) return;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.assinaturaBase64 = null;
+    localStorage.removeItem(this.assinaturaKey);
+  }
+
+  salvarAssinatura() {
+    if (!this.canvas) return;
+
+    const base64 = this.canvas.toDataURL('image/png');
+    this.assinaturaBase64 = base64;
+
+    const status = this.chamado?.status?.toLowerCase();
+
+    if (status === 'finalizado') {
+      console.log('Chamado finalizado → enviar pro servidor.');
+      return;
+    }
+
+    localStorage.setItem(this.assinaturaKey, base64);
+    console.log('Assinatura salva no cache.');
+  }
+
+  carregarAssinaturaDoCache() {
+    const data = localStorage.getItem(this.assinaturaKey);
+    if (data) {
+      this.assinaturaBase64 = data;
+    }
+  }
+
+  // ───────────────────────────────────────────────
+  //  MAPA / AÇÕES / CONTATOS
+  // ───────────────────────────────────────────────
 
   inicializarMapa(): void {
     const mapDiv = document.getElementById('map');
@@ -258,8 +318,8 @@ export class OsChamadoHomePage implements ViewDidEnter {
 
     if (this.map) this.map.remove();
 
-    const latOS = this.chamado?.lat ? Number(this.chamado.lat) : -21.124466;
-    const lngOS = this.chamado?.lng ? Number(this.chamado.lng) : -42.942535;
+    const latOS = this.chamado?.lat ? Number(this.chamado.lat) : -21.77762190782075;
+    const lngOS = this.chamado?.lng ? Number(this.chamado.lng) : -41.3119221;
 
     this.map = L.map(mapDiv, { zoomControl: false }).setView([latOS, lngOS], 16);
 
@@ -297,6 +357,7 @@ export class OsChamadoHomePage implements ViewDidEnter {
     setTimeout(() => this.map.invalidateSize(), 300);
   }
 
+  // Ações extras
   voltar(): void { this.router.navigate(['/home-list-os']); }
   ligar(numero: string): void { window.open(`tel:${numero}`, '_system'); }
   abrirWhatsApp(numero: string): void {
@@ -309,7 +370,6 @@ export class OsChamadoHomePage implements ViewDidEnter {
     if (!this.chamado?.lat || !this.chamado?.lng) return;
     const lat = this.chamado.lat;
     const lng = this.chamado.lng;
-    const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=$${lat},${lng}`;
-    window.open(urlGoogleMaps, '_system');
+    window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_system');
   }
 }

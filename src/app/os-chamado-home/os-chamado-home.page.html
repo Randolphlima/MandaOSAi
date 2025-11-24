@@ -182,9 +182,24 @@
 
 
     <!-- ABA ASSINATURA -->
-    <div *ngIf="aba == 'assinatura'" class="centro">
-      <p>Assinatura digital…</p>
+    <div *ngIf="aba == 'assinatura'" class="centro assinatura-wrapper">
+      <p>Peça para o cliente assinar abaixo:</p>
+
+      <!-- CANVAS -->
+      <div class="assinatura-container">
+        <canvas id="canvasAssinatura"></canvas>
+      </div>
+
+      <!-- BOTÕES -->
+      <ion-button expand="full" color="danger" (click)="limparAssinatura()">
+        Limpar Assinatura
+      </ion-button>
+
+      <ion-button expand="full" color="success" (click)="salvarAssinatura()">
+        Salvar Assinatura
+      </ion-button>
     </div>
+
 
   </div>
 
