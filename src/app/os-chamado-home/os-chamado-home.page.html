@@ -163,16 +163,17 @@
 
     <!-- ABA FOTO -->
     <div *ngIf="aba == 'foto'" class="centro fotos-container">
-      <ion-button (click)="tirarFotoMobile()" expand="full">📷 Tirar Foto</ion-button>
-      <ion-button (click)="escolherFotoMobile()" expand="full" color="secondary">🖼️ Escolher da Galeria</ion-button>
-
-      <!-- fallback para navegador -->
-      <input type="file" accept="image/*" multiple (change)="onFileSelected($event)" />
+      <ion-button (click)="capturarOuEscolherFoto()" expand="full" color="primary">
+        <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+        Enviar Foto
+      </ion-button>
 
       <ion-grid *ngIf="fotos.length > 0">
         <ion-row>
-          <ion-col size="6" *ngFor="let foto of fotos">
-            <img [src]="foto" class="foto-anexada" />
+          <ion-col size="6" size-md="4" *ngFor="let foto of fotos; let i = index">
+            <div class="foto-wrapper" (click)="acaoMiniatura(foto, i)">
+              <img [src]="foto" class="foto-anexada" />
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>

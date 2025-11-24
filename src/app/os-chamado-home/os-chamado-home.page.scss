@@ -61,7 +61,8 @@
     background: white;
     margin-top: -40px;
     border-radius: 35px 35px 0 0;
-    padding: 25px; // padding padrão
+    padding: 25px;
+    /* padding padrão */
     position: relative;
     z-index: 2;
     transition: padding 0.2s;
@@ -116,10 +117,12 @@ ion-content {
 
 .mapa-container {
     width: 100%;
-    height: calc(100vh - 220px); // altura total menos topo do header
+    height: calc(100vh - 220px);
+    /* altura total menos topo do header */
     background: #f3f3f3;
     overflow: hidden;
-    border-radius: 0; // remove borda arredondada para fullscreen
+    border-radius: 0;
+    /* remove borda arredondada para fullscreen */
 }
 
 #map {
@@ -166,9 +169,55 @@ ion-content {
     padding: 15px;
 }
 
+/* --- NOVOS ESTILOS PARA FOTOS COM CACHE --- */
+
+/* Estilos para a miniatura aparecer */
+.foto-wrapper {
+    position: relative;
+    /* Certifique-se de que há margem ou padding */
+    margin-bottom: 10px;
+}
+
 .foto-anexada {
     width: 100%;
+    /* Ocupa 100% da ion-col (50% da tela) */
+    height: 150px;
+    /* <--- ESSA ALTURA É CRÍTICA! Se for 0, não aparece. */
     border-radius: 8px;
-    margin-bottom: 10px;
     object-fit: cover;
+    /* Garante que a imagem preencha o espaço sem distorção */
+    display: block;
+    /* ADICIONE TEMPORARIAMENTE UMA BORDA PARA TESTE */
+    border: 2px solid red;
+}
+
+/* Se você removeu o padding do fotos-container, adicione-o de volta se necessário */
+.fotos-container {
+    padding: 15px;
+    /* Garante que o conteúdo não cole nas bordas */
+}
+
+.btn-remover-foto {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    font-size: 24px;
+    --color: var(--ion-color-danger);
+    --padding-end: 0;
+    --padding-start: 0;
+    height: 30px;
+    width: 30px;
+}
+
+/* Adicione esta classe ao seu os-chamado-home.page.scss */
+.photo-viewer-alert .alert-wrapper {
+    /* Ajusta a largura máxima para o alerta caber na tela */
+    max-width: 90%;
+}
+
+.photo-viewer-alert .alert-message {
+    /* Força a imagem a ser exibida corretamente */
+    padding: 0;
+    overflow-y: hidden;
 }
