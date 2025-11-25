@@ -1,29 +1,64 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="header-roxo">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center">Home</ion-title>
+    <ion-title class="titulo-centro">Home</ion-title>
 
     <ion-buttons slot="end">
       <ion-button routerLink="/home-config">
         <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
+<ion-content class="fundo-roxo ion-padding">
 
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
+  <!-- Texto Bem-vindo -->
+  <div class="bemvindo ion-text-center"> BEM VINDO(A) AO APP TÉCNICO! </div>
+
+  <!-- CARD DADOS DO TÉCNICO -->
+  <div class="card-dados">
+
+    <ion-avatar class="avatar-perfil">
+      <img
+        src="https://asset.gecdesigns.com/img/wallpapers/smiling-anime-school-boy-with-backpack-ai-generated-wallpaper-sr08072437-cover.webp"
+        alt="Usuário" />
+    </ion-avatar>
+
+    <div class="dados-texto">
+      <p><strong>Nome:</strong> Maria Abravanel de Souza</p>
+      <p><strong>Cargo:</strong> Técnico de Redes Pleno</p>
+      <p><strong>Horário:</strong> 08:00h às 18:00h</p>
+    </div>
+  </div>
+
+  <!-- CARD OS -->
+  <div class="card-os" routerLink="/home-list-os">
+
+    <div class="os-grid">
+
+      <!-- COLUNA ESQUERDA -->
+      <div class="os-esquerda">
+        <div class="titulo-os">ORDEM DE SERVIÇO</div>
+
+        <div class="botoes-status">
+          <span class="tag aberto">EM ABERTO</span>
+          <span class="tag fechado">FECHADAS</span>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA -->
+      <div class="os-direita">
+        <div class="bolinha vermelho">20</div>
+        <div class="bolinha verde">4</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
 </ion-content>

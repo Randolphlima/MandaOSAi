@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
 import {
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
+  IonHeader,
+  IonToolbar,
+  IonTitle,
   IonContent,
-  IonButtons, 
-  IonButton, 
-  IonMenuButton, 
-  IonIcon, 
-  IonCard, 
-  IonCardContent, 
-  IonCardHeader, 
-  IonCardSubtitle, 
-  IonCardTitle
+  IonButtons,
+  IonButton,
+  IonMenuButton,
+  IonIcon,
+  IonAvatar
 } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 
@@ -31,11 +27,14 @@ import { RouterModule } from '@angular/router';
     IonMenuButton,
     IonIcon,
     RouterModule,
-    IonCard, 
-    IonCardContent, 
-    IonCardHeader, 
-    IonCardSubtitle, 
-    IonCardTitle
+    IonAvatar
   ]
 })
-export class HomePage { }
+export class HomePage {
+
+  chamadosAbertos = 20;
+  chamadosFechados = 4;
+
+  constructor() { }
+
+}

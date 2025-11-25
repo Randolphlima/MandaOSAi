@@ -1,27 +1,130 @@
-#container {
+.fundo-roxo {
+  --background: #8a2be2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.header-roxo {
+  --background: #8a2be2;
+  color: white;
+}
+
+.titulo-centro {
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 100%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.bemvindo {
+  color: white;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+/* CARD DO TÉCNICO */
+.card-dados {
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-#container a {
-  text-decoration: none;
+.avatar-perfil {
+  width: 75px;
+  height: 75px;
+  min-width: 75px;
+}
+
+.dados-texto p {
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+/* CARD OS */
+.card-os {
+  background: white;
+  margin-top: 40px;
+  padding: 14px;
+  border-left: 4px solid #f1c40f;
+  border-right: 4px solid #f1c40f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card-os:hover {
+  transform: scale(1.02);
+}
+
+/* GRID */
+.os-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.os-esquerda {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-os {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+/* STATUS */
+.botoes-status {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.aberto {
+  background: #c0392b;
+}
+
+.fechado {
+  background: #27ae60;
+}
+
+/* COLUNA DIREITA - BOLINHAS */
+.os-direita {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.bolinha {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.vermelho {
+  background: #c0392b;
+}
+
+.verde {
+  background: #27ae60;
 }
