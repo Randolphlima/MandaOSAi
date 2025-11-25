@@ -1,11 +1,12 @@
-/* TOPO GRADIENTE (RETO) */
-.header-gradiente {
-    background: linear-gradient(180deg, #7b2ff7, #9c4dff);
-    height: 220px;
-    text-align: center;
+ion-content {
+    --background: #8a2be2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.header-roxo {
+    --background: #8a2be2;
     color: white;
-    padding-top: 25px;
-    position: relative;
-    border-radius: 0 !important;
-    /* garante que fique reto */
 }
