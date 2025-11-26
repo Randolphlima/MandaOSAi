@@ -22,7 +22,7 @@ ion-content {
 /* -------------------------------------- */
 
 /* Verde = Finalizado */
-.status-card-finalizado {
+.status-card-encerrada {
     --background: #e0f2e8;
     /* Fundo verde claro */
     border-left: 4px solid #388e3c;
@@ -30,7 +30,7 @@ ion-content {
 }
 
 /* Azul = Instalação */
-.status-card-aberto {
+.status-card-aberta {
     --background: #e3f2fd;
     /* Fundo azul claro */
     border-left: 4px solid #1976d2;
@@ -38,7 +38,7 @@ ion-content {
 }
 
 /* Vermelho = Prioridade */
-.status-card-prioridade {
+.status-card-pendente {
     --background: #fde0e0;
     /* Fundo vermelho claro */
     border-left: 4px solid #d32f2f;
@@ -46,7 +46,7 @@ ion-content {
 }
 
 /* Laranja = Manutenção */
-.status-card-pendente {
+.status-card-execucao {
     --background: #fff3e0;
     /* Fundo laranja claro */
     border-left: 4px solid #f57c00;
@@ -69,25 +69,25 @@ ion-content {
 }
 
 /* Define a cor de fundo do botão baseada na classe do card pai */
-.status-card-finalizado .status-button[disabled] {
+.status-card-encerrada .status-button[disabled] {
     --background: #388e3c;
     /* Verde */
     --color: white;
 }
 
-.status-card-aberto .status-button[disabled] {
+.status-card-aberta .status-button[disabled] {
     --background: #1976d2;
     /* Azul */
     --color: white;
 }
 
-.status-card-prioridade .status-button[disabled] {
+.status-card-pendente .status-button[disabled] {
     --background: #d32f2f;
     /* Vermelho */
     --color: white;
 }
 
-.status-card-pendente .status-button[disabled] {
+.status-card-execucao .status-button[disabled] {
     --background: #f57c00;
     /* Laranja */
     --color: white;
@@ -96,6 +96,11 @@ ion-content {
 /* -------------------------------------- */
 /* --- Estilos Gerais do Card --- */
 /* -------------------------------------- */
+
+ion-card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
 
 ion-card {
     border-radius: 8px;
@@ -113,8 +118,19 @@ ion-card-content p {
 
 .card-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     padding-top: 10px;
     margin-top: 10px;
     border-top: 1px solid #eee;
+}
+
+// Esconde o <ion-select> visualmente, mas mantém ele no DOM para ser clicado
+.hidden-select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; // Torna ele invisível
+    pointer-events: none; // Desativa o clique direto, o botão fará isso
 }

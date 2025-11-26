@@ -7,7 +7,7 @@
     <ion-title class="ion-text-center">Lista de Chamados</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button routerLink="/home-config">
+      <ion-button (click)="abrirConfig()">
         <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,7 +17,6 @@
 
 <ion-content class="ion-padding">
 
-  <!-- Botões -->
   <ion-grid>
     <ion-row>
       <ion-col size="4">
@@ -25,7 +24,16 @@
       </ion-col>
 
       <ion-col size="4">
-        <ion-button expand="block" fill="outline" color="light">Filtro</ion-button>
+        <ion-select #selectStatus aria-label="Status" interface="popover" [(ngModel)]="statusSelecionado"
+          (ionChange)="filtrarChamados()" class="hidden-select">
+          <ion-select-option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+
+        <ion-button expand="block" fill="outline" color="light" (click)="selectStatus.open()">
+          {{ getStatusLabel() }}
+        </ion-button>
       </ion-col>
 
       <ion-col size="4">
@@ -34,8 +42,8 @@
     </ion-row>
   </ion-grid>
 
-  <!-- Lista de chamados -->
-  <ion-card *ngFor="let c of chamados" class="status-card-{{c.status.toLowerCase()}}" (click)="abrirChamado(c)">
+  <ion-card *ngFor="let c of chamadosFiltrados" class="status-card-{{c.status.toLowerCase()}}"
+    (click)="abrirChamado(c)">
 
     <ion-card-header>
       <ion-card-title>{{c.nome}}</ion-card-title>
