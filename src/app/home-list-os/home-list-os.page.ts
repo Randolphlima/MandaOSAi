@@ -8,9 +8,9 @@ import {
   IonButtons, IonButton, IonMenuButton, IonIcon,
   IonCard, IonCardContent, IonCardHeader,
   IonCardTitle, IonCol, IonGrid, IonRow, IonBadge,
-  // Importe o IonSelect, IonSelectOption e FormsModule (para ngModel)
-  IonSelect, IonSelectOption
+  IonSelect, IonSelectOption, LoadingController, IonLoading
 } from '@ionic/angular/standalone';
+
 import { FormsModule } from '@angular/forms'; // Importar FormsModule para ngModel
 
 // Definição do tipo para o objeto de Chamado para melhor tipagem
@@ -41,19 +41,21 @@ interface StatusFilter {
     IonButtons, IonButton, IonMenuButton, IonIcon,
     IonCard, IonCardContent, IonCardHeader,
     IonCardTitle, IonCol, IonGrid, IonRow, IonBadge, UpperCasePipe, CommonModule,
-    // Adicionar IonSelect, IonSelectOption e FormsModule
-    IonSelect, IonSelectOption, FormsModule
+    IonSelect, IonSelectOption, FormsModule, IonLoading
   ]
 })
 export class HomeListOsPage {
 
-  constructor(private router: Router) {
+  // INJETAR LoadingController no constructor
+  constructor(private router: Router, private loadingCtrl: LoadingController) {
     // Inicializa a lista filtrada com todos os chamados na construção
     this.chamadosFiltrados = [...this.chamados];
   }
 
   // Lista completa de chamados (imutável)
   public chamados: Chamado[] = [
+    // ... (Chamados 1 a 5)
+    // Seus chamados 1 a 5
     {
       id: 1,
       nome: 'Randolph Rodrigues Ribeiro Lima',
@@ -107,31 +109,22 @@ export class HomeListOsPage {
     }
   ];
 
-  // Lista de chamados que será exibida no HTML (filtrada)
+  // ... (ChamadosFiltrados, statusSelecionado e statusOptions permanecem)
   public chamadosFiltrados: Chamado[] = [];
-
-  // Variável para armazenar o status selecionado, inicia com 'Todos'
   public statusSelecionado: string = 'todos';
-
-  // Opções de status para o <ion-select>
   public statusOptions: StatusFilter[] = [
     { label: 'Todos', value: 'todos' },
     { label: 'Aberta', value: 'aberta' },
-    { label: 'Em Execução', value: 'execucao' },
+    { label: 'Execução', value: 'execucao' },
     { label: 'Pendente', value: 'pendente' },
     { label: 'Encerrada', value: 'encerrada' }
   ];
 
-  /**
-   * Função que filtra a lista de chamados com base no status selecionado.
-   * Chamada no evento (ionChange) do ion-select.
-   */
+  // ... (filtrarChamados(), abrirChamado(), abrirConfig(), getStatusLabel() permanecem)
   public filtrarChamados(): void {
     if (this.statusSelecionado === 'todos') {
-      // Se 'Todos' estiver selecionado, exibe a lista completa
       this.chamadosFiltrados = [...this.chamados];
     } else {
-      // Filtra os chamados cujo status corresponde ao valor selecionado
       this.chamadosFiltrados = this.chamados.filter(
         chamado => chamado.status === this.statusSelecionado
       );
@@ -149,18 +142,57 @@ export class HomeListOsPage {
   }
 
   public getStatusLabel(): string {
-    // 1. Se 'todos' estiver selecionado, exibe "FILTRO" no botão.
     if (this.statusSelecionado === 'todos') {
       return 'FILTRO';
     }
-
-    // 2. Caso contrário, retorna o label correspondente ao status.
     const selected = this.statusOptions.find(
       option => option.value === this.statusSelecionado
     );
-
-    // Retorna o label encontrado, ou 'Filtro' como fallback se houver algum erro.
     return selected ? selected.label : 'Filtro';
   }
-  
+
+  /**
+   * Função para simular o refresh dos chamados.
+   * 1. Mostra o loading indicator ("gif" de atualização).
+   * 2. Simula a busca de dados (com um setTimeout).
+   * 3. Atualiza a lista com novos dados.
+   * 4. Esconde o loading indicator.
+   */
+  public async refreshChamados() {
+    // 1. Mostrar o Loading Indicator (o "gif" de atualização)
+    const loading = await this.loadingCtrl.create({
+      message: 'Atualizando chamados...', // Mensagem que aparece para o usuário
+      spinner: 'crescent', // Tipo de spinner, pode ser 'lines', 'crescent', 'dots', etc.
+      duration: 2000 // Definir um valor grande ou omitir para controle manual
+    });
+    await loading.present();
+
+    // Simulação da busca de novos dados do backend (substituir por sua chamada HTTP real)
+    setTimeout(() => {
+      // 3. Simular a inserção de um novo chamado (novos dados)
+      const novoChamado: Chamado = {
+        id: 6,
+        nome: 'NOVO CHAMADO ATUALIZADO',
+        descricao: 'Nova solicitação de serviço recebida.',
+        endereco: 'Rua do Teste, 100',
+        complemento: 'APT 101',
+        status: 'execucao',
+        contato: '5522999999999',
+        conexao: 'Online'
+      };
+
+      // Adiciona o novo chamado APENAS se ele ainda não existir (para evitar duplicidade no teste)
+      if (!this.chamados.find(c => c.id === novoChamado.id)) {
+        this.chamados.push(novoChamado);
+      }
+
+      // Aplica o filtro atual (caso algum filtro estivesse ativo)
+      this.filtrarChamados();
+
+      // 4. Esconder o Loading Indicator
+      loading.dismiss();
+
+    }, 1500); // 1.5 segundos para simular a requisição de rede
+  }
+
 }

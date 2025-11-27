@@ -19,11 +19,8 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="4">
-        <ion-button expand="block" fill="outline" color="light">18/11/2025</ion-button>
-      </ion-col>
 
-      <ion-col size="4">
+      <ion-col size="6">
         <ion-select #selectStatus aria-label="Status" interface="popover" [(ngModel)]="statusSelecionado"
           (ionChange)="filtrarChamados()" class="hidden-select">
           <ion-select-option *ngFor="let option of statusOptions" [value]="option.value">
@@ -32,12 +29,17 @@
         </ion-select>
 
         <ion-button expand="block" fill="outline" color="light" (click)="selectStatus.open()">
+          <ion-icon name="funnel-outline" slot="start"></ion-icon>
           {{ getStatusLabel() }}
         </ion-button>
       </ion-col>
 
-      <ion-col size="4">
-        <ion-button expand="block" fill="outline" color="light">Refresh</ion-button>
+      <ion-col size="6">
+        <ion-button expand="block" fill="outline" color="light" (click)="refreshChamados()">
+          <ion-icon name="sync-outline" slot="start"></ion-icon>
+          Refresh
+        </ion-button>
+
       </ion-col>
     </ion-row>
   </ion-grid>
