@@ -1,12 +1,31 @@
-ion-content {
+.config-bg {
     --background: #8a2be2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
 }
 
 .header-roxo {
     --background: #8a2be2;
     color: white;
+}
+
+.card-config {
+    width: 100%;
+    max-width: 500px;
+    margin: 15px auto;
+    border-radius: 15px;
+}
+
+.btn-area {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.btn-salvar {
+    margin-top: 20px;
+}
+
+ion-modal {
+    --width: 90%;
+    --max-width: 420px;
+    --border-radius: 14px;
 }
