@@ -11,19 +11,20 @@
         <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
+<ion-content>
+  <div id="map"></div>
+  
+  <div class="footer-refresh">
+    <ion-button expand="block" (click)="atualizarChamados()">
+      Atualizar
+    </ion-button>
 
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
+    <div *ngIf="carregando" class="loading-msg">
+      Carregando chamados...
+    </div>
+  </div>
+
 </ion-content>
