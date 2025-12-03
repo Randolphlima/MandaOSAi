@@ -3,11 +3,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
   IonContent,
-  IonIcon, // Adicione IonIcon
+  IonButtons,
   IonButton,
-  IonInput
+  IonInput,
+  IonIcon,
+  IonBackButton
 } from '@ionic/angular/standalone';
+
+// ✨ Correção 1: Importar e adicionar ícones
+import { addIcons } from 'ionicons';
+import { arrowBack } from 'ionicons/icons';
+
+addIcons({ arrowBack });
 
 @Component({
   selector: 'app-login-recovery',
@@ -15,23 +26,34 @@ import {
   styleUrls: ['./login-recovery.page.scss'],
   standalone: true,
   imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
     IonContent,
-    CommonModule,
-    FormsModule,
-    IonIcon, // Certifique-se que IonIcon está aqui
+    IonButtons,
     IonButton,
-    IonInput
+    IonInput,
+    IonIcon,
+    FormsModule,
+    CommonModule,
+    IonIcon,
+    IonBackButton
   ]
 })
+
 export class LoginRecoveryPage implements OnInit {
 
   constructor(private navCtrl: NavController) { } // NavController já injetado
 
-  goBack() {
-    // Esta função será executada ao clicar no novo botão
-    this.navCtrl.back();
-  }
-
   ngOnInit() {
   }
+
+  goBack() {
+    // Opção 1: Usando NavController do Ionic
+    this.navCtrl.back();
+
+    // Opção 2: Usando Location do Angular
+    // this.location.back();
+  }
+
 }

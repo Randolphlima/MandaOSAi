@@ -1,4 +1,13 @@
-<ion-content [fullscreen]="true">
+<ion-header>
+  <ion-toolbar class="header-roxo" toolbar-title-align="center">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login-home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Configurações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
 
   <h1 class="ion-text-center">Recuperação de Senha</h1>
 
@@ -7,17 +16,14 @@
 
   <div class="ion-padding ion-margin-top">
 
-    <ion-input label="Digite o seu celular" type="tel" label-placement="floating" fill="outline"
+    <ion-input label="Digite o seu celular" type="tel" label-placement="floating" color="light" fill="outline"
       placeholder="(11) 98765-4321"></ion-input><br><br>
 
-    <ion-button expand="block" color="primary" style="padding-bottom: 12px;">
+    <ion-button expand="block" color="light" style="padding-bottom: 12px;">
       Recuperar Senha
     </ion-button>
 
-    <ion-button expand="block" fill="outline" color="medium" (click)="goBack()">
-      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
-      Voltar para a Página Anterior
-    </ion-button>
-
   </div>
+
+
 </ion-content>
