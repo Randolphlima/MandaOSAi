@@ -1,18 +1,63 @@
-body
-{
-    color: white;
-}
+/* Estilos aplicados no arquivo login-recovery.page.scss */
 
+/* 1. Configurações de Fundo e Alinhamento PRINCIPAL */
 ion-content {
+    /* Fundo roxo, mantido do original */
     --background: #8a2be2;
+
+    /* 2. Correção de Alinhamento e Layout */
+    /* Remove qualquer padding nativo do content para alinhamento total */
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+
+    /* Configura o elemento nativo do Ion-Content como flex container */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-    color: white;
+
+    /* Mover todo o conteúdo para o BOTTOM (final do eixo principal) */
+    /* Isso fará com que o .content-wrapper se alinhe ao rodapé */
+    justify-content: flex-end;
 }
 
+/* 3. Cor do Texto: Garante que todos os textos fiquem brancos */
+.title-white,
+.text-white {
+    /* É recomendado usar 'inherit' para o título e parágrafo, 
+       mas 'white !important' garante que funcione */
+    color: white !important;
+}
+
+/* 4. Estilo do Header (Cor de Fundo e Cor do Texto no Toolbar) */
 .header-roxo {
     --background: #8a2be2;
-    color: white;
+    /* Define a cor do texto (título, botões) na toolbar */
+    --color: white;
+}
+
+/* 5. Garante que o container interno ocupe 100% da largura, 
+   e se beneficie do alinhamento justify-content: flex-end */
+.content-wrapper {
+    width: 100%;
+    /* O padding já foi aplicado no HTML com ion-padding, garantindo espaço nas laterais. */
+}
+
+/* 6. Estilo dos Inputs (Para garantir que o texto e placeholders sejam brancos) */
+.input-white-text {
+    /* Cor do texto digitado */
+    --color: white;
+    /* Cor do placeholder e label flutuante */
+    --placeholder-color: rgba(255, 255, 255, 0.7);
+    /* Cor da borda outline */
+    --border-color: rgba(255, 255, 255, 0.5);
+    /* Cor do destaque ao focar */
+    --highlight-color: white;
+}
+
+/* NOVO: Adiciona um espaçamento vertical padrão para os inputs 
+   (Alternativa ao ion-margin-bottom no HTML, caso queira estilizar só aqui) */
+.input-white-text.ion-margin-bottom {
+    margin-bottom: 15px;
+    /* Ajuste o valor conforme a sua preferência */
 }

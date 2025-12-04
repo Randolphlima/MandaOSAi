@@ -1,29 +1,37 @@
 <ion-header>
-  <ion-toolbar class="header-roxo" toolbar-title-align="center">
+  <ion-toolbar class="header-roxo">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/login-home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Configurações</ion-title>
+    <ion-title class="ion-text-center">Recuperação de Senha</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-bottom ion-padding">
 
-  <h1 class="ion-text-center">Recuperação de Senha</h1>
+  <div class="content-wrapper">
 
-  <p class="ion-padding ion-text-center">Para receber seu código e criar uma nova senha, precisamos confirmar seu
-    celular. Por favor, informe seu número para que possamos enviar o código de verificação por SMS. 📱</p>
+    <h1 class="ion-text-center title-white">Recuperação de Senha</h1>
 
-  <div class="ion-padding ion-margin-top">
+    <p class="ion-padding ion-text-center text-white">
+      Para criar uma nova senha, informe seu <strong>código de usuário</strong> e o <strong>número do celular</strong>.
+      O link de recuperação será enviado por SMS. 📱
+    </p>
 
-    <ion-input label="Digite o seu celular" type="tel" label-placement="floating" color="light" fill="outline"
-      placeholder="(11) 98765-4321"></ion-input><br><br>
+    <div class="ion-padding-horizontal ion-margin-top">
 
-    <ion-button expand="block" color="light" style="padding-bottom: 12px;">
-      Recuperar Senha
-    </ion-button>
+      <ion-input label="Código do Usuário" type="text" label-placement="floating" color="light" fill="outline"
+        placeholder="Seu código de acesso" [(ngModel)]="codigoUsuario"
+        class="input-white-text ion-margin-bottom"></ion-input>
+
+      <ion-input label="Número do Celular" type="tel" label-placement="floating" color="light" fill="outline"
+        placeholder="(11) 98765-4321" [(ngModel)]="celular" class="input-white-text ion-margin-bottom"></ion-input>
+
+      <ion-button expand="block" color="light" (click)="recoverPassword()" shape="round">
+        Enviar Link de Recuperação
+      </ion-button>
+
+    </div>
 
   </div>
-
-
 </ion-content>

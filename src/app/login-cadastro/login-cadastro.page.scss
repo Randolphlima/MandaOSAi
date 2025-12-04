@@ -2,8 +2,8 @@
 
 :host {
     // Define cores customizadas para o componente
-    --ion-color-primary: #4B4B96;
-    --ion-color-secondary: #00A389; 
+    --ion-color-primary: #8a2be2;
+    --ion-color-secondary: #00A389;
     --ion-color-danger: #e02121;
 }
 
@@ -13,7 +13,7 @@
     flex-direction: column;
     height: 100%;
     /* Crucial para empurrar o 'button-container' para baixo */
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 20px 0;
     text-align: center;
 }
@@ -23,7 +23,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo da etapa no meio da tela */
+    justify-content: center;
+    /* Centraliza o conteúdo da etapa no meio da tela */
     padding: 0 10px;
 }
 
@@ -47,7 +48,8 @@ p {
 }
 
 ion-input-otp {
-    --ion-font-family: monospace; /* Fonte para melhor leitura dos dígitos */
+    --ion-font-family: monospace;
+    /* Fonte para melhor leitura dos dígitos */
     margin: 20px auto;
     max-width: 300px;
 }
@@ -70,16 +72,23 @@ ion-button {
 }
 
 .error-message {
-    min-height: 18px; /* Evita que o layout mude quando a mensagem de erro aparece */
+    min-height: 18px;
+    /* Evita que o layout mude quando a mensagem de erro aparece */
     font-size: 0.9em;
 }
 
 /* Estilos de Cores */
 ion-toolbar[color="primary"] {
-    --background: #4B4B96;
+    --background: #8a2be2;
     --color: #ffffff;
 }
+
 ion-progress-bar[color="secondary"] {
     --background: #e0e0e0;
     --progress-background: var(--ion-color-secondary);
+}
+
+.html-alert .alert-message strong,
+.html-alert .alert-message b {
+    font-weight: 700 !important;
 }
